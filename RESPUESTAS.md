@@ -32,3 +32,8 @@ Mitigaciones:
 - **DDD (Diseño dirigido por dominios):** Al usar limites contextuales, se define hasta donde llega un microservicio y empieza otro, como dividirlos por su funcionalidad en la app (Envíos, Facturación, ..).
 - **DRY (Don't Repeat Yourself):** DRY busca no repetir código, pero el compartir librerías entre servicios puede generar acoplamiento, asi que se prefiere tener duplicacion controlada.
 - **Criterios de tamaño:** Tamaño de un servicio se mide en resposabilidad, no en cuantas tablas o lineas de codigo tiene. Debe encapsular una funcionalidad completa y contener todo lo estrictamente necesario para cumplirla.
+
+## Bloque 2
+**Porque no usar `:latest`?**
+- `:latest` es bastante ambiguo ya que no distingue que version es, hoy puede ser la `1.1.0` y mañana la `2.0`, cosa que puede malograr el entorno en caso este no se compatible con la nueva version
+- SemVer (o Versionado Semántico) soluciona esto al dar un identificador único a cada versión, dependiendo de la escala de los cambios hechos respecto a la otra (primer número se cambia si es un cambio mayor, el segundo si es menor, y el tercero si es un parche). Permite reproducibilidad al fijar una version con la cual se sabe el entorno funciona
