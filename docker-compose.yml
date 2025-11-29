@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  api:
+    image: ejemplo-api-service:0.2.0 #nombre de imagen que se va a construir
+    build: . # busca dockerfile en carpeta actual
+    ports:
+      - "8080:80" #conecta puerto 8080 a puerto interno 80
+    volumes:
+      - ./app:/app #bind mount: conecta ./app a la carpeta del contenedor /app
+    depends_on:
+      - cache # ordena arranque: espera a cache
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 80 #sobreescribe CMD de dockerfile, --reload garantiza que al hacerse un cambio en los archivos, se recarga la app
+  
+  cache:
+    image: redis:alpine #agarra imagen oficial de redis, no necesita especificar build
+    ports:
+      - "6379" #puerto interno, solo expone puerto
